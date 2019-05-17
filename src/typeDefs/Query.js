@@ -1,4 +1,4 @@
-module.exports = `{
+export default `{
   "Don't be shy, say hello!"
   hello: String
   

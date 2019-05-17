@@ -4,6 +4,6 @@ const getPassthroughResolverForKeys = (keys) => {
   .reduce((acc, cur) => ({ ...acc, ...cur }));
 };
 
-module.exports = {
+export {
   getPassthroughResolverForKeys,
 };

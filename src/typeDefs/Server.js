@@ -1,4 +1,4 @@
-module.exports = `{
+export default `{
   Game: String
   IsReady: Boolean
   PirateUsedPCU: Int

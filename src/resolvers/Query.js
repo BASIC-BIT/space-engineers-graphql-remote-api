@@ -1,6 +1,6 @@
 const { query } = require('../broker/remoteRestApi');
 
-module.exports = {
+export default {
   ping: async () => (await query('v1/server/ping', { text: false })).Result,
   server: async () => (await query('v1/server', { text: false })),
   api: async () => (await query('api', { text: false })),

@@ -1,6 +1,6 @@
 const { getPassthroughResolverForKeys } = require('../util/resolverUtils');
 
-module.exports = getPassthroughResolverForKeys([
+export default getPassthroughResolverForKeys([
   'X',
   'Y',
   'Z',

@@ -1,4 +1,4 @@
-module.exports = `{
+export default `{
   X: Float
   Y: Float
   Z: Float

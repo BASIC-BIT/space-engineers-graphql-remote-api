@@ -1,8 +1,11 @@
 const { ApolloServer, gql } = require('apollo-server');
-const requireDir = require('require-dir');
+const requireDir = require('webpack-requiredir');
 
-const resolvers = requireDir('./resolvers');
-const typeDefFiles = requireDir('./typeDefs');
+const resolvers = requireDir(require.context('./resolvers', true, /\.js$/));
+const typeDefFiles = requireDir(require.context('./typeDefs', true, /\.js$/));
+
+console.log('resolvers', JSON.stringify(resolvers));
+console.log('typeDefFiles', JSON.stringify(typeDefFiles));
 
 const typeDefs = gql`
 ${Object.entries(typeDefFiles)
