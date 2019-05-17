@@ -1,0 +1,29 @@
+{
+  "name": "space-engineers-graphql-remote-api",
+  "version": "0.0.1",
+  "description": "A GraphQL wrapper around the Space Engineers REST Remote API",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npx mocha --recursive",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BASIC-BIT/space-engineers-graphql-remote-api.git"
+  },
+  "keywords": [
+    "space",
+    "engineers"
+  ],
+  "author": "BASIC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BASIC-BIT/space-engineers-graphql-remote-api/issues"
+  },
+  "homepage": "https://github.com/BASIC-BIT/space-engineers-graphql-remote-api#readme",
+  "dependencies": {
+    "apollo-server": "^2.5.0",
+    "graphql": "^14.3.0",
+    "require-dir": "^1.2.0"
+  }
+}
