@@ -5,7 +5,9 @@ const resolvers = requireDir('./resolvers');
 const typeDefFiles = requireDir('./typeDefs');
 
 const typeDefs = gql`
-${Object.entries(typeDefFiles).map(([key, value]) => `type ${key} ${value}`).join('\n')}
+${Object.entries(typeDefFiles)
+  .map(([key, value]) => `type ${key} ${value}`)
+  .join('\n')}
 `;
 
 const server = new ApolloServer({
