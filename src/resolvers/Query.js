@@ -13,11 +13,11 @@ async function gridsQueryResolver (parent, {
   }
 
   if(topBlocksCount) {
-    return outputGrids.sort(sortNumericallyByKey('BlocksCount')).splice(0, topBlocksCount);
+    return outputGrids.sort(sortNumericallyByKey('BlocksCount', { descending: true })).splice(0, topBlocksCount);
   }
 
   if(topPCU) {
-    return outputGrids.sort(sortNumericallyByKey('PCU')).splice(0, topPCU);
+    return outputGrids.sort(sortNumericallyByKey('PCU', { descending: true })).splice(0, topPCU);
   }
 
   return outputGrids;
