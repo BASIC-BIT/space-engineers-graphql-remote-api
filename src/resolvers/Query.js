@@ -5,11 +5,16 @@ async function gridsQueryResolver (parent, {
   topBlocksCount,
   topPCU,
   aboveSpeed,
+  aboveDistanceToPlayer,
 } = {}) {
   let outputGrids = (await query('v1/session/grids', { text: false })).Grids;
 
   if(aboveSpeed) {
     outputGrids = outputGrids.filter(({ LinearSpeed }) => LinearSpeed > aboveSpeed);
+  }
+
+  if(aboveDistanceToPlayer) {
+    outputGrids = outputGrids.filter(({ DistanceToPlayer }) => DistanceToPlayer > aboveDistanceToPlayer);
   }
 
   if(topBlocksCount) {
