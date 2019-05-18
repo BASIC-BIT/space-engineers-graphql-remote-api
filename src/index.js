@@ -1,3 +1,5 @@
+import { getStatisticStore } from './util/statisticLogger';
+
 const { ApolloServer, gql } = require('apollo-server');
 const requireDir = require('webpack-requiredir');
 
@@ -20,4 +22,7 @@ const server = new ApolloServer({
 
 server.listen().then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
+
+  const statisticLogger = getStatisticStore();
+  statisticLogger.start();
 });
