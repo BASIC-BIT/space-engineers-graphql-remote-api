@@ -1,7 +1,4 @@
 export default `{
-  "Don't be shy, say hello!"
-  hello: String
-  
   "Ping Space Engineers Remote API"
   ping: String
   
@@ -13,6 +10,12 @@ export default `{
   
   "Get Planets"
   planets: [Planet]
+  
+  "Get Asteroids"
+  asteroids: [Asteroid]
+  
+  "Get Players"
+  players: [Player]
   
   "Query arbitrary GET endpoint"
   query(url: String): String
