@@ -21,10 +21,10 @@ export default `{
   chat: [ChatMessage]
   
   "Get Grids"
-  grids: [Grid]
+  grids(topBlocksCount: Int, topPCU: Int, aboveSpeed: Int): [Grid]
   
   "Get Floating Objects"
-  floatingObjects: [FloatingObject]
+  floatingObjects(aboveSpeed: Int, aboveDistanceToPlayer: Int): [FloatingObject]
   
   "Query arbitrary GET endpoint"
   query(url: String): String
