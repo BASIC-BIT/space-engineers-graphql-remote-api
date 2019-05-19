@@ -9,6 +9,8 @@ async function gridsQueryResolver (parent, {
   aboveSpeed,
   aboveDistanceToPlayer,
   abovePCU,
+  aboveBlockCount,
+  belowBlockCount,
   nameIncludes,
   nameDoesNotInclude,
   ownedBy,
@@ -30,6 +32,14 @@ async function gridsQueryResolver (parent, {
 
   if(abovePCU) {
     outputGrids = outputGrids.filter(({ PCU }) => PCU > abovePCU);
+  }
+
+  if(aboveBlockCount) {
+    outputGrids = outputGrids.filter(({ BlocksCount }) => BlocksCount > aboveBlockCount);
+  }
+
+  if(belowBlockCount) {
+    outputGrids = outputGrids.filter(({ BlocksCount }) => BlocksCount < belowBlockCount);
   }
 
   if(nameIncludes) {

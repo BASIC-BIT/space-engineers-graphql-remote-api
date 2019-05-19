@@ -27,6 +27,8 @@ export default `{
     aboveSpeed: Float,
     aboveDistanceToPlayer: Int,
     abovePCU: Int,
+    aboveBlockCount: Int,
+    belowBlockCount: Int,
     nameIncludes: String,
     nameDoesNotInclude: String,
     ownedBy: String,
