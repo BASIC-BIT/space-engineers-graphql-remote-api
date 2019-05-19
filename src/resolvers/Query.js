@@ -45,15 +45,15 @@ async function gridsQueryResolver (parent, {
   }
 
   if(hasOwner !== undefined) {
-    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => hasOwner ? OwnerDisplayName.trim().length === 0 : OwnerDisplayName.trim().length > 0);
+    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => (hasOwner ? OwnerDisplayName : !OwnerDisplayName));
   }
 
   if(isPowered !== undefined) {
-    outputGrids = outputGrids.filter(({ IsPowered }) => isPowered ? IsPowered : !IsPowered);
+    outputGrids = outputGrids.filter(({ IsPowered }) => (isPowered ? IsPowered : !IsPowered));
   }
 
   if(isMoving !== undefined) {
-    outputGrids = outputGrids.filter(({ LinearSpeed }) => isMoving ? LinearSpeed - FLOAT_TOLERANCE > 0.0 : Math.abs(LinearSpeed) < FLOAT_TOLERANCE);
+    outputGrids = outputGrids.filter(({ LinearSpeed }) => (isMoving ? LinearSpeed - FLOAT_TOLERANCE > 0.0 : Math.abs(LinearSpeed) < FLOAT_TOLERANCE));
   }
 
   if(entityId) {
