@@ -5,7 +5,7 @@ export default `{
   Players: Int
   ServerId: ID
   ServerName: String
-  SimSpeed: Int
+  SimSpeed: Float
   SimulationCpuLoad: Int
   TotalTime: Int
   UsedPCU: Int
