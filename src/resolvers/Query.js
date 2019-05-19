@@ -45,7 +45,7 @@ async function gridsQueryResolver (parent, {
   }
 
   if(hasOwner !== undefined) {
-    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => hasOwner ? !!OwnerDisplayName : !OwnerDisplayName);
+    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => hasOwner ? OwnerDisplayName.trim().length === 0 : OwnerDisplayName.trim().length > 0);
   }
 
   if(isPowered !== undefined) {
