@@ -1,28 +1,73 @@
 const { query } = require('../broker/remoteRestApi');
 import { sortNumericallyByKey } from "../util/sorters";
+import { includes } from "../util/caseInsensitiveStringMatchers";
 
+const FLOAT_TOLERANCE = 0.001;
 async function gridsQueryResolver (parent, {
-  topBlocksCount,
-  topPCU,
+  sortBy,
+  sortAscending = false,
   aboveSpeed,
   aboveDistanceToPlayer,
+  abovePCU,
+  nameIncludes,
+  nameDoesNotInclude,
+  ownedBy,
+  hasOwner,
+  isPowered,
+  isMoving,
+  entityId,
+  top,
 } = {}) {
   let outputGrids = (await query('v1/session/grids', { text: false })).Grids;
 
-  if(aboveSpeed) {
-    outputGrids = outputGrids.filter(({ LinearSpeed }) => LinearSpeed > aboveSpeed);
+  if(aboveSpeed !== undefined) {
+    outputGrids = outputGrids.filter(({ LinearSpeed }) => LinearSpeed - FLOAT_TOLERANCE > aboveSpeed);
   }
 
   if(aboveDistanceToPlayer) {
     outputGrids = outputGrids.filter(({ DistanceToPlayer }) => DistanceToPlayer > aboveDistanceToPlayer);
   }
 
-  if(topBlocksCount) {
-    return outputGrids.sort(sortNumericallyByKey('BlocksCount', { descending: true })).splice(0, topBlocksCount);
+  if(abovePCU) {
+    outputGrids = outputGrids.filter(({ PCU }) => PCU > abovePCU);
   }
 
-  if(topPCU) {
-    return outputGrids.sort(sortNumericallyByKey('PCU', { descending: true })).splice(0, topPCU);
+  if(nameIncludes) {
+    outputGrids = outputGrids.filter(({ DisplayName }) => includes(DisplayName, nameIncludes));
+  }
+
+  if(nameDoesNotInclude) {
+    outputGrids = outputGrids.filter(({ DisplayName }) => !includes(DisplayName, nameDoesNotInclude));
+  }
+
+  if(ownedBy) {
+    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => includes(OwnerDisplayName, ownedBy));
+  }
+
+  if(hasOwner !== undefined) {
+    outputGrids = outputGrids.filter(({ OwnerDisplayName }) => hasOwner ? OwnerDisplayName : !OwnerDisplayName);
+  }
+
+  if(isPowered !== undefined) {
+    outputGrids = outputGrids.filter(({ IsPowered }) => isPowered ? IsPowered : !IsPowered);
+  }
+
+  if(isMoving !== undefined) {
+    outputGrids = outputGrids.filter(({ LinearSpeed }) => isMoving ? LinearSpeed - FLOAT_TOLERANCE > 0.0 : Math.abs(LinearSpeed) < FLOAT_TOLERANCE);
+  }
+
+  if(entityId) {
+    outputGrids = outputGrids.filter(({ EntityId }) => EntityId == entityId);
+  }
+
+  if(sortBy) {
+    outputGrids = outputGrids.sort(sortNumericallyByKey(sortBy, {
+      descending: !sortAscending,
+    }));
+  }
+
+  if(top) {
+    return outputGrids.splice(0, top);
   }
 
   return outputGrids;

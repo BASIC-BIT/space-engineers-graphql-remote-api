@@ -21,7 +21,21 @@ export default `{
   chat: [ChatMessage]
   
   "Get Grids"
-  grids(topBlocksCount: Int, topPCU: Int, aboveSpeed: Int, aboveDistanceToPlayer: Int): [Grid]
+  grids(
+    sortBy: String,
+    sortAscending: Boolean,
+    aboveSpeed: Float,
+    aboveDistanceToPlayer: Int,
+    abovePCU: Int,
+    nameIncludes: String,
+    nameDoesNotInclude: String,
+    ownedBy: String,
+    hasOwner: Boolean,
+    isPowered: Boolean,
+    isMoving: Boolean,
+    entityId: ID,
+    top: Int
+  ): [Grid]
   
   "Get Floating Objects"
   floatingObjects(aboveSpeed: Int, aboveDistanceToPlayer: Int): [FloatingObject]
